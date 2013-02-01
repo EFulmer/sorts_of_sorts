@@ -10,11 +10,12 @@ def insertion_sort(l):
             j = j-1
 
 def main():
-    list = [1,2,3,4,5,6,7]
-    shuffle(list)
-    print('Unsorted:', list)
-    insertion_sort(list)
-    print('Sorted:', list)
+    print 'Test of insertion sort:'
+    lst = [x for x in range(10)]
+    shuffle(lst)
+    print 'Unsorted:', lst
+    insertion_sort(lst)
+    print 'Sorted:', lst
 
 if __name__ == '__main__':
     main()

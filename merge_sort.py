@@ -1,16 +1,15 @@
 # Standard merge sort, done in Python as an exercise.
-# TODO: take number argument, sort that many numbers, and fail gracefully.
 
 from math import floor
 from random import shuffle
-from sys import argv
 
-def merge_sort(list):
-    if len(list) <= 1:
-        return list
-    mid = floor(len(list)/2)
-    left = merge_sort(list[0:mid])
-    right = merge_sort(list[mid:])
+def merge_sort(ls):
+    if len(ls) <= 1:
+        return ls
+    # in smaller arrays, it'd be better to do insertion sort to reduce overhead
+    mid = int(floor(len(ls)/2))
+    left = merge_sort(ls[0:mid])
+    right = merge_sort(ls[mid:])
     return merge(left, right)
 
 def merge(a, b):
@@ -31,12 +30,12 @@ def merge(a, b):
     return c
 
 def main():
-    print('Hello')
-    list = [x for x in range(10)]
-    shuffle(list)
-    print('Input:', list)
-    list = merge_sort(list)
-    print('Output:', list)
+    print 'Test of merge sort:'
+    lst = [x for x in range(10)]
+    shuffle(lst)
+    print 'Input:', lst
+    lst = merge_sort(lst)
+    print 'Output:', lst
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
