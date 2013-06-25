@@ -1,16 +1,15 @@
-
 (ns merge-sort)
 
-(defn merge-sort [coll] 
-  (let [first-half (take (/ (count coll) 2) coll)
-        second-half (drop (/ (count coll) 2) coll)]
+(defn merge-sort 
+  "Sorts a sequence with merge sort by the given predicate. If none is 
+given, <= is used. O(n log n) performance."
+  ([coll] (merge-sort coll <=))
+  ([coll cmp]
+  (letfn [(first-half [xs] (take (/ (count xs) 2) xs))
+          (second-half [xs] (drop (/ (count xs) 2) xs))
+          (merge [xs ys] (cond (not (seq xs)) ys
+                               (not (seq ys)) xs
+                               (cmp (first xs) (first ys)) (cons (first xs) (merge (rest xs) ys))
+                               :else (cons (first ys) (merge xs (rest ys)))))]
     (if (>= 1 (count coll)) coll
-        (let [merge-first (merge-sort first-half)
-              merge-second (merge-sort second-half)]
-          (mergefn merge-first merge-second)))))
-
-(defn mergefn [x y] 
-  (cond (not (seq x)) y
-        (not (seq y)) x
-        (> (first x) (first y)) (cons (first y) (mergefn x (rest y)))
-        :else (cons (first x) (mergefn (rest x) y))))
+        (merge (merge-sort (first-half coll) cmp) (merge-sort (second-half coll) cmp))))))

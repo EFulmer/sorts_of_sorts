@@ -1,3 +1,5 @@
+module MergeSort (mergeSort) where
+
 merge :: (Ord a) => [a] -> [a] -> [a] -> [a]
 merge [] [] xs = xs
 merge ls [] xs = xs ++ ls
